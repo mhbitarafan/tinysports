@@ -17,7 +17,15 @@ import { MessagesComponent } from './messages/messages.component';
 import {MsgloaderService} from './msgloader.service';
 import { PaginationComponent } from './pagination/pagination.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatButtonModule} from '@angular/material';
+import {
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatButtonModule,
+  MatCardModule, MatCheckboxModule, MatSidenavModule, MatSelectModule
+} from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BlogComponent } from './blog/blog.component';
@@ -72,7 +80,11 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatSelectModule
   ],
   providers: [HttpServiceService, MsgloaderService, CookieService, CartService],
   bootstrap: [AppComponent],
