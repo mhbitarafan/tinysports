@@ -1,0 +1,19 @@
+<div class="container-fluid containerbg bg-warning p-0">
+    <div class="row m-0 justify-content-end">
+    <div class="col-12 col-xl-2 p-0 m-0 text-center">
+<nav class="navbar navbar-dark text-white navbar-expand px-2 py-2">
+    <div class="dropdown-divider"></div>
+  <div class="navbar-nav text-right w-100">
+    <div class="btn-group cat-btns w-100">
+      <div class="row m-0 w-100">
+        <ul class="col-12 list-group p-0 text-center">
+          <a routerLink="/product-category/{{i.link}}" *ngFor="let i of categorylist" class="list-group-item list-group-item-action">{{i.title}}</a>
+          <a routerLink="/blog" class="list-group-item list-group-item-action">بلاگ</a>
+        </ul>
+        </div>
+        </div>
+      </div>
+ </nav>
+    </div>
+    </div>
+</div>

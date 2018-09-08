@@ -1,0 +1,29 @@
+#cat-toggle {
+  border: 0;
+}
+.dropdown-menu-cat{
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.cat-btns button {
+  -webkit-border-radius: 0!important;
+  -moz-border-radius: 0!important;
+  border-radius: 0!important;
+}
+.containerbg {
+  -webkit-background-size: cover;
+  background-size: cover;
+  background: url("./assests/b02ce77a4c976caee7d965a3811b25d7.jpg") no-repeat;
+  height: calc(93vh - 1px);
+}
+.navbar {
+  border-radius: 6px;
+}
+.new {
+  margin-top: 8px;
+  background: #ffe357;
+  padding: 5px;
+  margin-bottom: 2px;
+  border-radius: 4px;
+}

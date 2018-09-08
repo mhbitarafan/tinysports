@@ -1,0 +1,29 @@
+@font-face {
+  font-family: irsans;
+  src: url(./assets/IRANSansWeb.woff);
+}
+@font-face {
+  font-family: yekan;
+  src: url(./assets/Yekan.woff);
+}
+i {
+  font-family: FontAwesome;
+  font-style: normal;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+a.disabled {
+  pointer-events: none;
+}
+@media only screen and (min-width: 1200px) {
+  .sidebar {
+    min-height: 100vh;
+  }
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+
+  opacity: 1;
+
+}

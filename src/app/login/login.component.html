@@ -1,0 +1,30 @@
+ <div class="container-fluid" style="min-height: 100vh;">
+    <div class="row mt-0">
+      <div class="col-12 col-xl-10 order-2 order-xl-1 p-0" dir="rtl">
+          <div class="col-12 col-xl-6 mt-3">
+            <h4 class="text-right mb-3">ورود به سایت</h4>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="نام کاربری یا ایمیل">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="رمز عبور">
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-xl-6">
+            <h4 class="text-right mb-3 mt-4">ثبت نام</h4>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="نام کاربری" [(ngModel)]="userData.username">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="ایمیل" [(ngModel)]="userData.email">
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <input matInput placeholder="رمز عبور" [(ngModel)]="userData.pass">
+            </mat-form-field>
+            <input class="btn btn-danger text-right d-flex justify-content-end" (click)="signup()" type="submit" value="ثبت نام">
+          </div>
+        </div>
+      <app-sidebar class="col-12 bg-light col-xl-2 mb-3 mb-xl-0 p-0 order-1 order-xl-2 sidebar"></app-sidebar>
+      <app-messages *ngIf="msgloader.showMsg"></app-messages>
+    </div>
+  </div>

@@ -1,0 +1,8 @@
+.list-group-item {
+  background: transparent;
+  border: 0;
+}
+.list-group-item:hover {
+  background: rgba(231, 231, 231, 0.72);
+}
+
