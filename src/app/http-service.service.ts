@@ -78,6 +78,17 @@ export class HttpServiceService {
         }
       ));
   }
+  signin(userData) {
+    this.url = 'http://tinysports.ir/webservice.php?post_type=signin';
+    return this.http.post(this.url, userData)
+      .pipe(map(
+        (response: Response) => {
+          const responsestring = JSON.stringify(response);
+          const parsedResponse = JSON.parse(responsestring);
+          return parsedResponse._body;
+        }
+      ));
+  }
   productsNumber(parsedData) {
     const count = parsedData.category[0].count;
     return count;
