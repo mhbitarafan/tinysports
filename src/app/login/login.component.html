@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row bg-light mt-0">
-    <div class="row justify-content-center pr-xl-5 col-12 col-xl-10 order-2 order-xl-1 p-0 m-0 mt-xl-4" dir="rtl">
+    <div class="row justify-content-center col-12 col-xl-10 order-2 order-xl-1 p-0 m-0 mt-xl-4" dir="rtl">
 
-      <div class="d-flex col-12 col-xl-5 mr-xl-3 order-2 order-xl-1">
+      <div *ngIf="!isLoggedin" class="d-flex col-12 col-xl-5 mr-xl-3 order-2 order-xl-1">
         <div class="col-12 mt-3 p-0">
           <mat-card>
             <mat-card-title class="d-flex justify-content-between text-right">ثبت نام در سایت
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="col-12 col-xl-5 mt-xl-3 order-1 order-xl-2">
+      <div *ngIf="!isLoggedin" class="col-12 col-xl-5 mt-xl-3 order-1 order-xl-2">
         <mat-card>
           <mat-card-title class="d-flex justify-content-between text-right">ورود به حساب کاربری
             <a href="#" class="card-link text-dark"> <i class="fab fa-google-plus mr-2 text-danger"></i></a>
@@ -54,7 +54,14 @@
           </mat-card-subtitle>
         </mat-card>
       </div>
-
+      <div *ngIf="isLoggedin" class="row col-12 justify-content-center">
+      <div class="col-12 justify-content-center text-right">
+      <mat-card class="mb-3" style="min-height: 100vh;">
+        <p>{{inuserData.usermail}} عزیز شما قبلا وارد سایت شده اید. برای ورود به پنل کاربری خود بر روی لینک زیر کلیک نمایید.</p>
+        <p><a href="#" class="card-link">ورود به پنل کاربری</a></p>
+      </mat-card>
+      </div>
+      </div>
     </div>
     <app-sidebar class="col-12 bg-white col-xl-2 mb-3 mb-xl-0 p-0 order-1 order-xl-2 sidebar"></app-sidebar>
     <app-messages *ngIf="msgloader.showMsg"></app-messages>

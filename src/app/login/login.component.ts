@@ -3,6 +3,8 @@ import {HttpServiceService} from '../http-service.service';
 import {CartService} from '../cart.service';
 import {MsgloaderService} from '../msgloader.service';
 import {MediaMatcher} from '@angular/cdk/layout';
+import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +26,13 @@ export class LoginComponent implements OnInit {
     usermail: string,
     pass: string
   };
+  responeMsg: string;
   private userDataJson: string;
-  constructor(public Httpservice: HttpServiceService, public  Cartservice: CartService, public msgloader: MsgloaderService) { }
+  private date: Date;
+  isLoggedin = false;
+  private cookieValue: string;
+  private username: string;
+  constructor(public Httpservice: HttpServiceService, public  Cartservice: CartService, public msgloader: MsgloaderService, private cookieService: CookieService, private router: Router) { }
   signup() {
     this.userDataArray = {username: this.userData.username, pass: this.userData.pass, email: this.userData.email};
     this.userDataJson = JSON.stringify(this.userDataArray);
@@ -45,12 +52,28 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           this.msgloader.showMsg = true;
-          this.msgloader.initMsg(response, 'alert-success');
+          if (response !== '') {
+            this.responeMsg = 'با موفقیت وارد سایت شدید.';
+            this.date = new Date();
+            this.cookieService.set('session_id', response, this.date.getTime() + (90 * 24 * 60 * 60), '/');
+            this.username = JSON.stringify(this.inuserData.usermail)
+            this.cookieService.set('user', this.username.replace(/\"/g, ''), this.date.getTime() + (90 * 24 * 60 * 60), '/');
+            this.isLoggedin = true;
+          } else {
+            this.responeMsg = 'نام کاربری یا رمز عبور اشتباه است.';
+          }
+          this.msgloader.initMsg(this.responeMsg, 'alert-success');
+          this.router.navigate(['/product-category/blade']);
           this.msgloader.autoHide();
         }
       );
   }
   ngOnInit() {
+    this.cookieValue = this.cookieService.get('user');
+    if (this.cookieValue !== '') {
+      this.inuserData.usermail = this.cookieValue;
+      this.isLoggedin = true;
+    }
   }
 
 }
