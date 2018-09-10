@@ -1,0 +1,13 @@
+<nav *ngIf="!Httpservice.hidePaginator" class="d-flex flex-wrap justify-content-center my-3 p-0">
+  <mat-paginator class="d-flex justify-content-center col-11 mb-2 mx-5 px-5" [length]= "Httpservice.pnum"
+                 [pageSize]= "Httpservice.pernumber"
+                 [pageSizeOptions]= "pageSizeOptions"
+                 [pageIndex]="Httpservice.pagenumber - 1"
+                 (page)="pageEvent = handlePage($event)">
+  </mat-paginator>
+  <div class="d-flex mx-3" style="overflow: auto">
+    <ul *ngIf="Httpservice.pnum >= Httpservice.pernumber" class="pagination" >
+      <li *ngFor="let i of Httpservice.pageArr" routerLinkActive="active" [ngClass]="{'active': router.url === '/' + Httpservice.type + '/' + Httpservice.category && i === Httpservice.pageArr[0]}" class="page-item"><a [ngClass]="{'disabled': router.url === '/' + Httpservice.type + '/' + Httpservice.category && i === Httpservice.pageArr[0]}" routerLinkActive="disabled" [routerLink]="['/', Httpservice.type, Httpservice.category, i]" class="page-link">{{i}}</a></li>
+    </ul>
+  </div>
+  </nav>

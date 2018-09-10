@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-xl p-0 sticky-top" style="border-bottom: 1px solid #e8e8e8;" id="sticky">
+  <button class="navbar-toggler w-100 text-right bg-light p-3" data-toggle="collapse" data-target="#nav">دسته بندی<i class="fa fa-angle-down float-left"></i></button>
+  <div class="collapse navbar-collapse p-2 p-lg-0" id="nav">
+    <div id="accordion" class="accordion w-100">
+      <ul class="list-group w-100 text-right">
+        <div *ngFor="let i of categorylist">
+          <a *ngIf="i.link === 'pingpong'; else condition1" href="#" [attr.data-target] ="'#' + i.link" data-toggle="collapse" class="list-group-item list-group-item-action">{{i.title}}<span class="float-left h5"><i class="fa fa-angle-down"></i></span> </a>
+          <ng-template #condition1><a routerLink="/product-category/{{i.link}}" [attr.data-target] ="'#' + i.link" data-toggle="collapse" class="list-group-item list-group-item-action">{{i.title}}</a></ng-template>
+          <div id="{{i.link}}" class="collapse" data-parent="#accordion">
+            <div class="pr-3" *ngIf="i.link === 'pingpong'">
+              <a *ngFor="let j of subcategoryping" class="nav-link list-group-item-light" routerLink="/product-category/{{j.link}}">{{j.title}}</a>
+            </div>
+          </div>
+        </div>
+        <a class="list-group-item list-group-item-action" routerLink="/blog">بلاگ</a>
+      </ul>
+    </div>
+  </div>
+</nav>

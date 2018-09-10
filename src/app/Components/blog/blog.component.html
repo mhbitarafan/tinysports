@@ -1,0 +1,16 @@
+<div class="container-fluid" style="min-height: 100vh;">
+  <div class="row mt-0">
+    <div class="col-12 col-xl-10 order-2 order-xl-1 p-0">
+      <div class="row justify-content-end px-4">
+        <div class="d-flex justify-content-center align-items-center w-100 mt-5" *ngIf="this.Httpservice.ActivateLoader"><mat-spinner></mat-spinner></div>
+        <div *ngFor="let post of posts" class="col-12 col-sm-6 col-xl-4 p-0">
+          <div class="card text-center m-2">
+            <a href="#"><img  class="card-img-top" src="http://tinysports.ir/wp-content/uploads/{{post.imgurl}}"></a>
+            <a class="card-link p-title text-right text-dark p-1 mt-1 d-flex justify-content-center align-items-center" dir="rtl" href="#">{{post.title}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-sidebar class="col-12 bg-light col-xl-2 mb-3 mb-xl-0 p-0 order-1 order-xl-2 sidebar"></app-sidebar>
+  </div>
+</div>
