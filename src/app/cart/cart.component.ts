@@ -3,6 +3,7 @@ import {CartService} from '../cart.service';
 import {MsgloaderService} from '../msgloader.service';
 import {HttpServiceService} from '../http-service.service';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit {
   private cookieValue: string;
   private date: Date;
 
-  constructor(public Cartservice: CartService, public  msgloader: MsgloaderService, private cookieService: CookieService, private Httpservice: HttpServiceService) {
+  constructor(public Cartservice: CartService, public  msgloader: MsgloaderService, private cookieService: CookieService, private Httpservice: HttpServiceService, private router: Router) {
   }
 
   updateCart() {
@@ -30,6 +31,7 @@ export class CartComponent implements OnInit {
           this.msgloader.autoHide();
           this.Cartservice.cartData = [];
           this.updateCart();
+          this.router.navigate(['/product-category/blade']);
         }
       );
   }

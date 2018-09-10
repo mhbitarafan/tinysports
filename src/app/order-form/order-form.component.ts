@@ -7,15 +7,18 @@ import {CookieService} from 'ngx-cookie-service';
   styleUrls: ['./order-form.component.css']
 })
 export class OrderFormComponent implements OnInit {
-  inuserData = {usermail: ''};
-  private cookieValue: string;
+  inuserData = {username: '', email: ''};
+  private username: string;
+  private email: string;
 
   constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.cookieValue = this.cookieService.get('user');
-    if (this.cookieValue !== '') {
-      this.inuserData.usermail = this.cookieValue;
+    this.username = JSON.parse(this.cookieService.get('user')).username;
+    this.email = JSON.parse(this.cookieService.get('user')).email;
+    if (this.username !== '') {
+      this.inuserData.username = this.username;
+      this.inuserData.email = this.email;
     }
   }
 

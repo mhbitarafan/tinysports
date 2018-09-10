@@ -1,4 +1,4 @@
-<nav class="d-flex flex-wrap justify-content-center my-3 p-0">
+<nav *ngIf="!Httpservice.hidePaginator" class="d-flex flex-wrap justify-content-center my-3 p-0">
   <mat-paginator class="d-flex justify-content-center col-11 mb-2 mx-5 px-5" [length]= "Httpservice.pnum"
                  [pageSize]= "Httpservice.pernumber"
                  [pageSizeOptions]= "pageSizeOptions"

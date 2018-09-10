@@ -24,7 +24,7 @@ import {
   MatInputModule,
   MatPaginatorModule,
   MatButtonModule,
-  MatCardModule, MatCheckboxModule, MatSidenavModule, MatSelectModule
+  MatCardModule, MatCheckboxModule, MatSidenavModule, MatSelectModule, MatDialogModule
 } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
@@ -34,6 +34,7 @@ import {CartComponent} from './cart/cart.component';
 import { CartService } from './cart.service';
 import { LoginComponent } from './login/login.component';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { AccountComponent } from './account/account.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomePageComponent},
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
   {path: 'not-found', component: NotfoundComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'account', component: AccountComponent},
   {path: '**', redirectTo: '/not-found'},
 ]
 @NgModule({
@@ -66,7 +68,8 @@ const appRoutes: Routes = [
     NotfoundComponent,
     CartComponent,
     LoginComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,8 @@ const appRoutes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [HttpServiceService, MsgloaderService, CookieService, CartService],
   bootstrap: [AppComponent],

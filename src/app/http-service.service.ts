@@ -30,7 +30,11 @@ export class HttpServiceService {
   searchInput: string;
   hidePaginator = false;
   catTitle: string;
+  get pnum(): number {
+    return this._pnum;
+  }
   catlist = ['blade', 'rubber', 'pingball', 'table', 'pingracket', 'badminton', 'balls', 'footbalhand', 'billiard', 'airfilter', 'flask', ];
+  private arr: any[];
   constructor(private http: Http, private router: Router) {
   }
   getProductlist(pernumber: number = 12, pagenumber: number = 1, cat: string = 'blade', searchTerm?: string, postType: string = 'product') {
@@ -48,44 +52,14 @@ export class HttpServiceService {
     return this.http.get(this.url)
       .pipe(map(
         (response: Response) => {
-          const jsonResponse = response.json();
-          const data = JSON.stringify(jsonResponse);
-          this.parsedData = JSON.parse(data);
-          const arr = [this.parsedData, pernumber];
-          return arr;
-        }
-      ));
-  }
-  submitOrderDB(orderData) {
-    this.url = 'http://tinysports.ir/webservice.php?post_type=order';
-    return this.http.post(this.url, orderData)
-      .pipe(map(
-        (response: Response) => {
-          const responsestring = JSON.stringify(response);
-          const parsedResponse = JSON.parse(responsestring);
-          return parsedResponse._body;
-        }
-      ));
-  }
-  signup(userData) {
-    this.url = 'http://tinysports.ir/webservice.php?post_type=signup';
-    return this.http.post(this.url, userData)
-      .pipe(map(
-        (response: Response) => {
-          const responsestring = JSON.stringify(response);
-          const parsedResponse = JSON.parse(responsestring);
-          return parsedResponse._body;
-        }
-      ));
-  }
-  signin(userData) {
-    this.url = 'http://tinysports.ir/webservice.php?post_type=signin';
-    return this.http.post(this.url, userData)
-      .pipe(map(
-        (response: Response) => {
-          const responsestring = JSON.stringify(response);
-          const parsedResponse = JSON.parse(responsestring);
-          return parsedResponse._body;
+          const data = JSON.stringify(response);
+          this.parsedData = (JSON.parse(data))._body;
+          try {
+            this.arr = [JSON.parse(this.parsedData), pernumber];
+          }   catch (e) {
+            this.arr = [this.parsedData, pernumber, '1'];
+          }
+          return this.arr;
         }
       ));
   }
@@ -114,27 +88,25 @@ export class HttpServiceService {
     }
   }
 
-  get pnum(): number {
-    return this._pnum;
-  }
-
   productDetailes(products) {
     this.products = [];
-    this.count = this.productsNumber(products[0]);
-    this.CreateCountArr();
-    for (let i = 0; i < this.parseData(products[0]).length; i++) {
-      this.products.push({
-        title:
-          this.parseData(products[0])[i].post_title.replace('<br>', '\n'),
-        price:
-        this.parseData(products[0])[i].price,
-        imgurl:
-        this.parseData(products[0])[i].img,
-        url:
-        this.parseData(products[0])[i].url,
-        stock:
-        this.parseData(products[0])[i].stock
-      });
+    if (products.length < 3) {
+      this.count = this.productsNumber(products[0]);
+      this.CreateCountArr();
+      for (let i = 0; i < this.parseData(products[0]).length; i++) {
+        this.products.push({
+          title:
+            this.parseData(products[0])[i].post_title.replace('<br>', '\n'),
+          price:
+          this.parseData(products[0])[i].price,
+          imgurl:
+          this.parseData(products[0])[i].img,
+          url:
+          this.parseData(products[0])[i].url,
+          stock:
+          this.parseData(products[0])[i].stock
+        });
+      }
     }
   }
   postDetailes(products) {
@@ -152,5 +124,49 @@ export class HttpServiceService {
   scrolltoTop() {
     const elementt = document.getElementById('top');
     elementt.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+  }
+  signup(userData) {
+    this.url = 'http://tinysports.ir/webservice.php?post_type=signup';
+    return this.http.post(this.url, userData)
+      .pipe(map(
+        (response: Response) => {
+          const responsestring = JSON.stringify(response);
+          const parsedResponse = JSON.parse(responsestring);
+          return parsedResponse._body;
+        }
+      ));
+  }
+  signin(userData) {
+    this.url = 'http://tinysports.ir/webservice.php?post_type=signin';
+    return this.http.post(this.url, userData)
+      .pipe(map(
+        (response: Response) => {
+          const responsestring = JSON.stringify(response);
+          const parsedResponse = JSON.parse(responsestring);
+          return parsedResponse._body;
+        }
+      ));
+  }
+  checkLoginData(userData) {
+    this.url = 'http://tinysports.ir/webservice.php?post_type=login_status';
+    return this.http.post(this.url, userData)
+      .pipe(map(
+        (response: Response) => {
+          const responsestring = JSON.stringify(response);
+          const parsedResponse = JSON.parse(responsestring);
+          return parsedResponse._body;
+        }
+      ));
+  }
+  submitOrderDB(orderData) {
+    this.url = 'http://tinysports.ir/webservice.php?post_type=order';
+    return this.http.post(this.url, orderData)
+      .pipe(map(
+        (response: Response) => {
+          const responsestring = JSON.stringify(response);
+          const parsedResponse = JSON.parse(responsestring);
+          return parsedResponse._body;
+        }
+      ));
   }
 }
