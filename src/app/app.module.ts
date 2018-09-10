@@ -2,49 +2,39 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { CategoryMenuComponent } from './category-menu/category-menu.component';
-import { ProductCategoryComponent } from './product-category/product-category.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { CategoryMenuComponent } from './Components/category-menu/category-menu.component';
 import {RouterModule, Routes} from '@angular/router';
-import { HomePageComponent } from './home-page/home-page.component';
-import { ProductSingleComponent } from './product-category/product-single/product-single.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import {HttpServiceService} from './http-service.service';
+import { HomePageComponent } from './Components/home-page/home-page.component';
+import { ProductCategoryComponent } from './Components/products/product-category/product-category.component';
+import {HttpServiceService} from './Services/http-service.service';
 import {HttpModule} from '@angular/http';
-import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { MessagesComponent } from './messages/messages.component';
-import {MsgloaderService} from './msgloader.service';
-import { PaginationComponent } from './pagination/pagination.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { MessagesComponent } from './Components/messages/messages.component';
+import {MsgloaderService} from './Services/msgloader.service';
+import { PaginationComponent } from './Components/pagination/pagination.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatIconModule,
-  MatProgressSpinnerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatButtonModule,
-  MatCardModule, MatCheckboxModule, MatSidenavModule, MatSelectModule, MatDialogModule
-} from '@angular/material';
+import { MatIconModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatButtonModule, MatCardModule, MatCheckboxModule, MatSidenavModule, MatSelectModule, MatDialogModule } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { BlogComponent } from './blog/blog.component';
-import {NotfoundComponent} from './notfound/notfound.component';
-import {CartComponent} from './cart/cart.component';
-import { CartService } from './cart.service';
-import { LoginComponent } from './login/login.component';
-import { OrderFormComponent } from './order-form/order-form.component';
-import { AccountComponent } from './account/account.component';
+import { BlogComponent } from './Components/blog/blog.component';
+import {NotfoundComponent} from './Components/notfound/notfound.component';
+import {CartComponent} from './Components/cart/cart.component';
+import { CartService } from './Services/cart.service';
+import { LoginComponent } from './Components/login/login.component';
+import { OrderFormComponent } from './Components/order-form/order-form.component';
+import { AccountComponent } from './Components/account/account.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'product-category', component: ProductCardComponent},
+  {path: 'product-category', component: ProductCategoryComponent},
   {path: 'blog', component: BlogComponent},
-  {path: 'search', component: ProductCardComponent},
-  {path: 'search/:searchterm', component: ProductCardComponent},
-  {path: 'search/:searchterm/:page', component: ProductCardComponent},
-  {path: 'product-category/:category', component: ProductCardComponent},
-  {path: 'product-category/:category/:page', component: ProductCardComponent},
+  {path: 'search', component: ProductCategoryComponent},
+  {path: 'search/:searchterm', component: ProductCategoryComponent},
+  {path: 'search/:searchterm/:page', component: ProductCategoryComponent},
+  {path: 'product-category/:category', component: ProductCategoryComponent},
+  {path: 'product-category/:category/:page', component: ProductCategoryComponent},
   {path: 'not-found', component: NotfoundComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
@@ -56,10 +46,8 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     CategoryMenuComponent,
-    ProductCategoryComponent,
     HomePageComponent,
-    ProductSingleComponent,
-    ProductCardComponent,
+    ProductCategoryComponent,
     FooterComponent,
     SidebarComponent,
     MessagesComponent,
