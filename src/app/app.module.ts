@@ -17,7 +17,15 @@ import { MessagesComponent } from './messages/messages.component';
 import {MsgloaderService} from './msgloader.service';
 import { PaginationComponent } from './pagination/pagination.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatButtonModule} from '@angular/material';
+import {
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatButtonModule,
+  MatCardModule, MatCheckboxModule, MatSidenavModule, MatSelectModule, MatDialogModule
+} from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BlogComponent } from './blog/blog.component';
@@ -26,6 +34,7 @@ import {CartComponent} from './cart/cart.component';
 import { CartService } from './cart.service';
 import { LoginComponent } from './login/login.component';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { AccountComponent } from './account/account.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomePageComponent},
@@ -39,6 +48,7 @@ const appRoutes: Routes = [
   {path: 'not-found', component: NotfoundComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'account', component: AccountComponent},
   {path: '**', redirectTo: '/not-found'},
 ]
 @NgModule({
@@ -58,7 +68,8 @@ const appRoutes: Routes = [
     NotfoundComponent,
     CartComponent,
     LoginComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +83,12 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [HttpServiceService, MsgloaderService, CookieService, CartService],
   bootstrap: [AppComponent],
