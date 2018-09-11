@@ -15,8 +15,9 @@ import {GeneralService} from '../../../Services/general.service';
 export class ProductCategoryComponent implements OnInit {
   catTitle: string;
   pagebroad: number;
-  added: string;
-  private date: Date;
+  cat1: string;
+  catTitle2: string;
+  private catTitle3: string;
   categorylist = [
     {title: 'پینگ پنگ', link: 'pingpong'},
     {title: 'بدمینتون', link: 'badminton'},
@@ -33,9 +34,6 @@ export class ProductCategoryComponent implements OnInit {
     {title: 'توپ پینگ پنگ' , link: 'pingball'},
     {title: 'راکت آماده پینگ پنگ', link: 'pingracket'}
   ];
-  cat1: string;
-  catTitle2: string;
-  private catTitle3: string;
 
   constructor(public Httpservice: HttpServiceService, private route: ActivatedRoute, public msgloader: MsgloaderService, private router: Router, public cartservice: CartService, private cookieService: CookieService, public general: GeneralService) {
     this.Httpservice.ActivateLoader = true;
@@ -117,6 +115,7 @@ export class ProductCategoryComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.cartservice.checkCartData();
     this.catTitle = '';
     this.pagebroad = 0;
     this.cat1 = '';

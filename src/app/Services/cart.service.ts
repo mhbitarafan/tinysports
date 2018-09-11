@@ -18,7 +18,6 @@ export class CartService {
     number: number
   }];
   public addedToCart: string;
-  private number = 1;
 
   constructor(public cookieService: CookieService, public  Httpservice: HttpServiceService, public msgloader: MsgloaderService, public router: Router) { }
 
@@ -29,25 +28,26 @@ export class CartService {
     }
   }
 
+  updateCartCookie() {
+    this.date = new Date();
+    this.cookieService.set('cartData', JSON.stringify(this.cartData), this.date.getTime() + (100 * 24 * 60 * 60 * 1000), '/');
+  }
+
   addToCart(productTitle: string, Price: number) {
-    this.checkCartData();
     this.alreadyExists = false;
     this.addedToCart = productTitle;
     this.msgloader.initMsg('به سبد خرید افزوده شد.', 'alert-success', true);
-    try {
       for (let i = 0; i < this.cartData.length; i++) {
+
         if (this.cartData[i].title === productTitle) {
           this.alreadyExists = true;
-          this.number = this.cartData[i].number++;
-          console.log(this.cartData[i].number);
-          return;
+          this.cartData[i].number++;
         }
       }
-      this.cartData.push({title: productTitle, price: Price, number: this.number});
+      if (!this.alreadyExists) {
+        this.cartData.push({title: productTitle, price: Price, number: 1});
+      }
       this.updateCartCookie();
-      this.date = new Date();
-      this.cookieService.set( 'cartData', JSON.stringify(this.cartData) , this.date.getTime() + (100 * 24 * 60 * 60 * 1000) , '/' );
-    }    catch (e) {}
   }
 
   calcTotal() {
@@ -58,17 +58,12 @@ export class CartService {
     return this.total;
   }
 
-  updateCartCookie() {
-    this.date = new Date();
-    this.cookieService.set('cartData', JSON.stringify(this.cartData), this.date.getTime() + (100 * 24 * 60 * 60 * 1000), '/');
-  }
-
   submitOrder() {
     this.Httpservice.submitOrderDB(JSON.stringify(this.cartData))
       .subscribe(
         (response) => {
           this.msgloader.initMsg('سفارش شما با موفقیت ثبت شد.', 'alert-success', true);
-          this.cartData = [{title: '', number: 1, price: 1}];
+          this.cartData = [{title: '', number: 0, price: 0}];
           this.updateCartCookie();
           this.router.navigate(['/product-category/blade']);
         }

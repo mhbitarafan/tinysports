@@ -18,7 +18,7 @@
             <mat-card-actions>
               <button class="btn btn-danger px-3"><i class="fa fa-heart"></i></button>
               <button class="btn btn-primary ml-2"><i class="fa fa-balance-scale"></i></button>
-              <button (click)="cartservice.addToCart(product.title, product.price)" *ngIf="product.stock !== 'outofstock'" class="btn btn-success ml-2"><i class="fa fa-shopping-basket"></i><i *ngIf="cartservice.addedToCart === product.title && product.title === Httpservice.products[i].title" class="fa fa-check ml-2"></i></button>
+              <button (click)="cartservice.addToCart(product.title, product.price)" *ngIf="product.stock !== 'outofstock'" class="btn btn-success ml-2"><i class="fa fa-shopping-basket"></i><i *ngIf="cartservice.addedToCart === product.title" class="fa fa-check ml-2"></i></button>
             </mat-card-actions>
           </mat-card>
         </div>
