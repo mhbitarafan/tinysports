@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CartService} from '../../Services/cart.service';
 import {MsgloaderService} from '../../Services/msgloader.service';
 import {HttpServiceService} from '../../Services/http-service.service';
@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 })
 export class CartComponent implements OnInit {
   constructor(public Cartservice: CartService, public  msgloader: MsgloaderService) { }
+
   ngOnInit() {
     this.Cartservice.checkCartData();
   }

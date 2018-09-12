@@ -3,6 +3,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {HttpServiceService} from './http-service.service';
 import {MsgloaderService} from './msgloader.service';
 import {Router} from '@angular/router';
+import {CartData} from '../Models/CartData.Model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,15 @@ export class CartService {
   private total: number;
   private date: Date;
   private cartDataCookie: string;
-  cartData: [{
-    title: string,
-    price: number,
-    number: number
-  }];
   public addedToCart: string;
+  cartData: CartData[] = [];
 
   constructor(public cookieService: CookieService, public  Httpservice: HttpServiceService, public msgloader: MsgloaderService, public router: Router) { }
 
   checkCartData() {
     this.cartDataCookie = this.cookieService.get('cartData');
     if (this.cartDataCookie !== '') {
-      this.cartData = JSON.parse(this.cartDataCookie);
+      return this.cartData = JSON.parse(this.cartDataCookie);
     }
   }
 
@@ -37,6 +34,7 @@ export class CartService {
     this.alreadyExists = false;
     this.addedToCart = productTitle;
     this.msgloader.initMsg('به سبد خرید افزوده شد.', 'alert-success', true);
+    if (this.cartData !== undefined) {
       for (let i = 0; i < this.cartData.length; i++) {
 
         if (this.cartData[i].title === productTitle) {
@@ -44,18 +42,21 @@ export class CartService {
           this.cartData[i].number++;
         }
       }
-      if (!this.alreadyExists) {
-        this.cartData.push({title: productTitle, price: Price, number: 1});
-      }
-      this.updateCartCookie();
+    }
+    if (!this.alreadyExists) {
+      this.cartData.push({title: productTitle, price: Price, number: 1});
+    }
+    this.updateCartCookie();
   }
 
   calcTotal() {
     this.total = 0;
-    for (let i = 0; i < this.cartData.length; i++) {
-      this.total += this.cartData[i].price * this.cartData[i].number;
+    if (this.cartData !== undefined) {
+      for (let i = 0; i < this.cartData.length; i++) {
+        this.total += this.cartData[i].price * this.cartData[i].number;
+      }
+      return this.total;
     }
-    return this.total;
   }
 
   submitOrder() {

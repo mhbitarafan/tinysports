@@ -8,8 +8,6 @@ import { MsgloaderService} from '../../Services/msgloader.service';
 })
 export class MessagesComponent implements OnInit {
     constructor(public msgloader: MsgloaderService) {  }
-    msgtxt = this.msgloader.msgtxt;
-    msgtype = this.msgloader.msgtype;
   ngOnInit() {
   }
 }

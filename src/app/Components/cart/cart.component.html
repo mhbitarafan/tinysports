@@ -5,8 +5,8 @@
         <mat-card class="col-12 mb-3" style="min-height: 100vh;">
         <div class="col-12 px-2">
             <h3 class="text-right mat-card-title">سبد خرید</h3>
-            <p dir="rtl" class="text-right mt-3" *ngIf="Cartservice.cartData.length == 0">سبد خرید شما خالی می باشد.</p>
-            <table *ngIf="Cartservice.cartData.length > 0" class="table table-striped text-right mt-3" dir="rtl">
+            <p dir="rtl" class="text-right mt-3" *ngIf="Cartservice.cartData.length !== 0">سبد خرید شما خالی می باشد.</p>
+            <table *ngIf="Cartservice.cartData.length !== 0" class="table table-striped text-right mt-3" dir="rtl">
               <thead>
               <tr>
                 <th style="width:40px">#</th>
@@ -38,8 +38,8 @@
             </table>
         </div>
         <div class="col-12">
-          <app-order-form *ngIf="Cartservice.cartData.length > 0"></app-order-form>
-            <button (click)="Cartservice.submitOrder()" *ngIf="Cartservice.cartData.length > 0" class="btn btn-success mr-3 float-right">ثبت سفارش</button>
+          <app-order-form *ngIf="Cartservice.cartData.length !== 0"></app-order-form>
+            <button (click)="Cartservice.submitOrder()" *ngIf="Cartservice.cartData.length !== 0" class="btn btn-success mr-3 float-right">ثبت سفارش</button>
         </div>
         </mat-card>
       </div>

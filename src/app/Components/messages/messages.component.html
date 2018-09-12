@@ -1,6 +1,6 @@
 <div class="container-fluid fixed-bottom p-0 p-lg-3" dir="rtl">
-  <div class="{{msgtype}} alert alert-dismissible show fade text-justify col-12 col-lg-5 col-xl-3 m-0 float-right">
-    <span>{{msgtxt}}</span>
+  <div class="{{this.msgloader.msgtype}} alert alert-dismissible show fade text-justify col-12 col-lg-5 col-xl-3 m-0 float-right">
+    <span>{{this.msgloader.msgtxt}}</span>
     <button class="close" role="button" data-dismiss="alert" (click)="msgloader.showMsg = false">&times;</button>
   </div>
 </div>

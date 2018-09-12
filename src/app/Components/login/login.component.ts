@@ -13,28 +13,6 @@ import {GeneralService} from '../../Services/general.service';
 })
 
 export class LoginComponent implements OnInit {
-  userData = {
-    username: '',
-    pass: '',
-    email: ''
-  };
-  inuserData = {
-    usermail: '',
-    pass: ''
-  };
-  checkuserData = {
-    usermail: '',
-    session_id: ''
-  };
-  userDataArray: { username: string; pass: string; email: string };
-  inuserDataArray: {
-    usermail: string,
-    pass: string
-  };
-  checkuserDataArray: {
-    usermail: string,
-    session_id: string
-  };
   responeMsg: string;
   private userDataJson: string;
   private userDataCookieJson: string;
@@ -43,27 +21,34 @@ export class LoginComponent implements OnInit {
   private username: string;
   private session_id: string;
   private email: string;
+  signUpuserData = {
+    username: '',
+    pass: '',
+    email: ''
+  };
+  loginUserData = {
+    usermail: '',
+    pass: ''
+  };
   private userDataCookie = {
     username: '',
     email: ''
   };
   constructor(public Httpservice: HttpServiceService, public  Cartservice: CartService, public msgloader: MsgloaderService, private cookieService: CookieService, private router: Router, public general: GeneralService) {
-    this.isClosed = true;
+    this.isDialogClosed = true;
   }
-  isClosed: boolean;
+  isDialogClosed: boolean;
   Closemodal() {
-    this.isClosed = true;
+    this.isDialogClosed = true;
   }
   signup() {
-    this.userDataArray = {username: this.userData.username, pass: this.userData.pass, email: this.userData.email};
-    this.userDataJson = JSON.stringify(this.userDataArray);
+    this.userDataJson = JSON.stringify(this.signUpuserData);
     this.Httpservice.signup(this.userDataJson)
       .subscribe(
         (response) => {
           this.msgloader.showMsg = true;
-          this.msgloader.initMsg('ثبت نام شما با موفقیت انجام شد.', 'alert-success');
-          this.msgloader.autoHide();
-          this.userData = {
+          this.msgloader.initMsg('ثبت نام شما با موفقیت انجام شد.', 'alert-success', true);
+          this.signUpuserData = {
             username: '',
             pass: '',
             email: ''
@@ -71,13 +56,11 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-  signin() {
-    this.inuserDataArray = {usermail: this.inuserData.usermail, pass: this.inuserData.pass};
-    this.userDataJson = JSON.stringify(this.inuserDataArray);
+  Login() {
+    this.userDataJson = JSON.stringify(this.loginUserData);
     this.Httpservice.signin(this.userDataJson)
       .subscribe(
         (response) => {
-          this.msgloader.showMsg = true;
           if (response !== '') {
             response = JSON.parse(response);
             this.responeMsg = 'با موفقیت وارد سایت شدید.';
@@ -89,14 +72,13 @@ export class LoginComponent implements OnInit {
             this.userDataCookieJson = JSON.stringify(this.userDataCookie);
             this.cookieService.set('user', this.userDataCookieJson, this.date.getTime() + (90 * 24 * 60 * 60), '/');
             this.general.isLoggedin = true;
-            this.msgloader.initMsg(this.responeMsg, 'alert-success');
+            this.msgloader.initMsg(this.responeMsg, 'alert-success', true);
             this.router.navigate(['/product-category/blade']);
           } else {
             this.responeMsg = 'نام کاربری یا رمز عبور اشتباه است.';
-            this.msgloader.initMsg(this.responeMsg, 'alert-success');
           }
-          this.isClosed = false;
-          this.msgloader.autoHide();
+          this.msgloader.initMsg(this.responeMsg, 'alert-success', true);
+          this.isDialogClosed = false;
         }
       );
   }
@@ -105,8 +87,7 @@ export class LoginComponent implements OnInit {
     this.cookieService.delete('session_id');
     this.general.isLoggedin = false;
     this.msgloader.showMsg = true;
-    this.msgloader.initMsg('با موفقیت خارج شدید.', 'alert-success');
-    this.msgloader.autoHide();
+    this.msgloader.initMsg('با موفقیت خارج شدید.', 'alert-success', true);
   }
   ngOnInit() {
     this.session_id = this.cookieService.get('session_id');
@@ -118,7 +99,7 @@ export class LoginComponent implements OnInit {
     }
     if (this.session_id !== '') {
       this.general.isLoggedin = true;
-      this.inuserData.usermail = this.cookieValue;
+      this.loginUserData.usermail = this.cookieValue;
       this.general.checkLoginData();
     }
   }

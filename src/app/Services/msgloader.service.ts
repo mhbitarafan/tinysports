@@ -5,18 +5,20 @@ import {
 @Injectable()
 export class MsgloaderService {
   showMsg = false;
-  private msgtype: string;
+  public msgtype: string;
   public msgtxt: string;
+  private timeouthandle: number;
 
   constructor() {
   }
 
   initMsg(msgText: string, msgType: string, autoHide: boolean, autoHideTimeout: number = 4000) {
+    if (this.timeouthandle) { window.clearTimeout(this.timeouthandle); }
     this.showMsg = true;
     this.msgtxt = msgText;
     this.msgtype = msgType;
     if (autoHide) {
-      window.setTimeout(() => {
+      this.timeouthandle = window.setTimeout(() => {
         this.showMsg = false;
       }, autoHideTimeout);
     }
